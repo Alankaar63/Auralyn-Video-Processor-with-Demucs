@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Processing Result</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="container">
+    <h1>Processing Completed ✅</h1>
+
+    <section class="result-section">
+      <h2>🗒️ Transcription:</h2>
+      <p class="transcription">{{ transcription }}</p>
+    </section>
+
+    <section class="downloads">
+      <h2>⬇️ Downloads:</h2>
+      <ul>
+        <li><a href="/download/{{ vocals_file }}">Download Vocals (WAV)</a></li>
+        <li><a href="/download/{{ video_file }}">Download Processed Video (MP4)</a></li>
+      </ul>
+    </section>
+
+    <a href="/" class="back-btn">🔙 Go Back</a>
+  </div>
+</body>
+</html>
+<h2>Chat with AI</h2>
+<div id="chatbox"></div>
+<input type="text" id="userMessage" placeholder="Type something...">
+<button onclick="sendMessage()">Send</button>
+
+<script>
+function sendMessage() {
+    let msg = document.getElementById('userMessage').value;
+    fetch("/chat", {
+        method: "POST",
+        body: new URLSearchParams({message: msg})
+    })
+    .then(response => response.json())
+    .then(data => {
+        let chatbox = document.getElementById('chatbox');
+        chatbox.innerHTML += `<p><b>You:</b> ${msg}</p>`;
+        chatbox.innerHTML += `<p><b>AI:</b> ${data.reply}</p>`;
+        document.getElementById('userMessage').value = "";
+    });
+}
+</script>

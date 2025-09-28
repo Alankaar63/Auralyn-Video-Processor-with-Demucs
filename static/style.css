@@ -1,0 +1,136 @@
+/* === Dark Theme with Gradient Background === */
+body {
+  margin: 0;
+  height: 100vh;
+  font-family: 'Poppins', sans-serif;
+  color: #f8f9fa;
+  background: linear-gradient(-45deg, #0f2027, #203a43, #2c5364, #1a1a2e);
+  background-size: 400% 400%;
+  animation: gradientBG 10s ease infinite;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@keyframes gradientBG {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* === Container === */
+.container {
+  text-align: center;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 3rem;
+  border-radius: 20px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(10px);
+}
+
+/* === Headings === */
+h1 {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+  color: #00adb5;
+}
+
+.subtitle {
+  color: #bbbbbb;
+  margin-bottom: 2rem;
+}
+
+/* === Form === */
+input[type="file"] {
+  margin: 1rem 0;
+  color: #ffffff;
+}
+
+button {
+  background: linear-gradient(45deg, #00adb5, #00ffcc);
+  border: none;
+  padding: 0.8rem 1.5rem;
+  color: #000;
+  font-weight: bold;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 15px #00ffc6;
+}
+
+/* === Result Page === */
+.result-section, .downloads {
+  margin-top: 2rem;
+}
+
+.transcription {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 1rem;
+  border-radius: 10px;
+  color: #e0e0e0;
+  text-align: left;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+/* === Back Button === */
+.back-btn {
+  display: inline-block;
+  margin-top: 2rem;
+  text-decoration: none;
+  color: #00ffc6;
+  border: 2px solid #00ffc6;
+  padding: 0.6rem 1.2rem;
+  border-radius: 25px;
+  transition: 0.3s;
+}
+
+.back-btn:hover {
+  background: #00ffc6;
+  color: #000;
+}
+.chat-container {
+  background: rgba(0, 0, 0, 0.4);
+  border-radius: 20px;
+  padding: 20px;
+  margin-top: 30px;
+  color: white;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+}
+
+#chat-box {
+  height: 250px;
+  overflow-y: auto;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+#user-input {
+  width: 75%;
+  padding: 10px;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+  background: #222;
+  color: #fff;
+}
+
+button {
+  background: linear-gradient(90deg, #2193b0, #6dd5ed);
+  border: none;
+  padding: 10px 20px;
+  border-radius: 10px;
+  color: white;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+button:hover {
+  background: linear-gradient(90deg, #6dd5ed, #2193b0);
+}

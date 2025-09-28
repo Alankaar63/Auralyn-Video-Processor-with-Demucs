@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Study Enhancer</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="container">
+    <h1>AI Study Enhancer</h1>
+    <p class="subtitle">Upload your lecture video and get insights instantly!</p>
+
+    <form action="{{ url_for('process_video') }}" method="post" enctype="multipart/form-data">
+  <input type="file" name="file" required>
+  <button type="submit">Process Video</button>
+</form>
+
+  </div>
+</body>
+</html>
+
+<div class="chat-container">
+  <h2>💬 Gemini Chat Assistant</h2>
+  <div id="chat-box"></div>
+  <input type="text" id="user-input" placeholder="Ask something..." />
+  <button onclick="sendMessage()">Send</button>
+</div>
+
+<script>
+async function sendMessage() {
+  const userInput = document.getElementById('user-input');
+  const message = userInput.value.trim();
+  if (!message) return;
+
+  const chatBox = document.getElementById('chat-box');
+  chatBox.innerHTML += `<p><b>You:</b> ${message}</p>`;
+
+  const response = await fetch('/chat', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    body: `message=${encodeURIComponent(message)}`
+  });
+  const data = await response.json();
+
+  chatBox.innerHTML += `<p><b>Gemini:</b> ${data.reply}</p>`;
+  userInput.value = '';
+  chatBox.scrollTop = chatBox.scrollHeight;
+}
+</script>
