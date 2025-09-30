@@ -69,7 +69,7 @@ def chat():
     transcription = session.get('transcription', '')
     prompt = f"Video transcription:\n{transcription}\n\nUser question: {user_message}"
 
-    model = genai.GenerativeModel('gemini-pro')
+    model = genai.GenerativeModel('gemini-pro-latest')
     response = model.generate_content(prompt)
 
     return jsonify({'reply': response.text})
@@ -78,5 +78,11 @@ def chat():
 def download_file(filename):
     return send_from_directory(app.config['OUTPUT_FOLDER'], filename, as_attachment=True)
 
+# For local testing
+# if __name__ == "__main__":
+#     app.run(debug=True)
+
+# For Docker deployment
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(host="0.0.0.0", port=5000, debug=False)
+
