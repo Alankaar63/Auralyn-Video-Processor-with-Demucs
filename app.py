@@ -65,14 +65,21 @@ def chat():
     if not user_message:
         return jsonify({'reply': "Please enter a message."})
 
-    # Optionally, prepend the transcription to give context to Gemini
-    transcription = session.get('transcription', '')
-    prompt = f"Video transcription:\n{transcription}\n\nUser question: {user_message}"
+    transcription = session.get('transcription', '')[:200]
 
-    model = genai.GenerativeModel('gemini-pro-latest')
+    # Only add transcription if message seems related to video
+    if user_message.lower() in ["hi", "hello", "hey", "how are you"]:
+        prompt = f"User: {user_message}\nBot:"
+    else:
+        prompt = f"Video transcription (short snippet): {transcription}\nUser: {user_message}\nBot:"
+
+    model = genai.GenerativeModel("gemini-2.5-flash-preview-09-2025")
     response = model.generate_content(prompt)
 
     return jsonify({'reply': response.text})
+
+
+
 
 @app.route("/download/<filename>")
 def download_file(filename):
@@ -84,5 +91,5 @@ def download_file(filename):
 
 # For Docker deployment
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000, debug=False)
+    app.run(host="0.0.0.0", port=5002, debug=False)
 
